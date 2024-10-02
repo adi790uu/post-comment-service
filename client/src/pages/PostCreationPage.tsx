@@ -1,6 +1,7 @@
+import axios from "axios";
 import React, { useState } from "react";
 import ReactQuill from "react-quill";
-import "react-quill/dist/quill.snow.css"; // Import the Quill editor styles
+import "react-quill/dist/quill.snow.css";
 import { useNavigate } from "react-router-dom";
 
 const PostCreationPage: React.FC = () => {
@@ -10,7 +11,7 @@ const PostCreationPage: React.FC = () => {
 
   const navigate = useNavigate();
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
     const newPost = {
@@ -19,8 +20,17 @@ const PostCreationPage: React.FC = () => {
       content,
     };
 
-    console.log("New Post Created:", newPost);
+    console.log(content);
 
+    const result = await axios.post(
+      "http://localhost:3000/v1/post/create",
+      newPost
+    );
+
+    if (result?.status !== 201) {
+      console.error("Failed to create post");
+      return;
+    }
     setAuthor("");
     setTitle("");
     setContent("");
