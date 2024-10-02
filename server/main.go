@@ -6,7 +6,6 @@ import (
 	"log/slog"
 	"os"
 	"os/signal"
-	configuration "post-comment-service/config"
 	"post-comment-service/database"
 	"syscall"
 	"time"
@@ -57,7 +56,7 @@ func main() {
 	}()
 
 	slog.Info("Server up at port:3000")
-	configuration.LoadEnv()
+	// configuration.LoadEnv()
 	client, dbContext, dbCancel := database.SetupMongoDB()
 
 
