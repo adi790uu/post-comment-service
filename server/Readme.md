@@ -4,10 +4,10 @@ This is the server for a simple post-comment service built using Go and the Fibe
 
 ## Technologies Used
 
-**Go**: The primary programming language used for building the service.
-**Fiber**: A fast web framework for Go, inspired by Express.js, which provides a simple and efficient way to handle HTTP requests.
-**MongoDB**: A NoSQL database used for storing posts and comments. It allows for flexible data models and easy scalability.
-**In-Memory Caching**: Implemented using a custom caching mechanism to store posts temporarily in memory, improving response times for frequently accessed data.
+1. **Go**: The primary programming language used for building the service.
+2. **Fiber**: A fast web framework for Go, inspired by Express.js, which provides a simple and efficient way to handle HTTP requests.
+3. **MongoDB**: A NoSQL database used for storing posts and comments. It allows for flexible data models and easy scalability.
+4. **In-Memory Caching**: Implemented using a custom caching mechanism to store posts temporarily in memory, improving response times for frequently accessed data.
 
 ## Why MongoDB?
 
