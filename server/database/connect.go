@@ -14,7 +14,7 @@ import (
 var mongoClient *mongo.Client
 
 func GetCollection(name string) *mongo.Collection {
-	return mongoClient.Database("sheriff-server").Collection(name)
+	return mongoClient.Database(os.Getenv("DB_NAME")).Collection(name)
 }
 
 func SetupMongoDB() (*mongo.Client, context.Context, context.CancelFunc) {

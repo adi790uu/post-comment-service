@@ -23,8 +23,7 @@ func CreateComment(c *fiber.Ctx) error {
 		slog.Error("Error parsing request body:", err)
 		return c.Status(400).JSON(fiber.Map{"error": "invalid request data"})
 	}
-
-
+	
 	postObjectID, err := primitive.ObjectIDFromHex(postReqData.PostID)
 	if err != nil {
 		slog.Error("Invalid postId format:", err)
@@ -39,12 +38,12 @@ func CreateComment(c *fiber.Ctx) error {
 		Date:    time.Now().Format(time.RFC3339),
 	}
 
+	slog.Info("Inserting comment for post with ID: " + postReqData.PostID)
 	_, err = commentColl.InsertOne(c.Context(), comment)
 
 	if err != nil {
 		slog.Error("Error inserting comment:", err)
 		return c.Status(500).JSON(fiber.Map{"error": "could not create comment"})
 	}
-
 	return c.Status(201).JSON(comment)
 }

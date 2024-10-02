@@ -54,12 +54,14 @@ func GetPost(c *fiber.Ctx) error {
 	}
 
 	post := new(models.Post)
+	slog.Info("Finding post with ID: " + id.Hex())
 	findErr := postsColl.FindOne(c.Context(), bson.M{"_id": id}).Decode(&post)
 	if findErr != nil {
-		slog.Error("Error finding document:", err)
+		slog.Error("Error finding document:", findErr)
 		return c.Status(500).JSON(fiber.Map{"error": "cannot find document"})
 	}
 
+	slog.Info("Finding comments for post with ID: " + id.Hex())
 	cursor, err := commentsColl.Find(c.Context(), bson.M{"post_id": id})
 	if err != nil {
 		slog.Error("Error finding comments:", err)
@@ -97,6 +99,7 @@ func CreatePost(c *fiber.Ctx) error {
 		Date:    time.Now().Format(time.DateTime),
 	}
 
+	slog.Info("Inserting post")
 	res, err := coll.InsertOne(c.Context(), post)
 	if err != nil {
 		slog.Error("Error creating post:", err)

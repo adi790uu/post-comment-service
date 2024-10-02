@@ -17,7 +17,7 @@ const Navbar = () => {
         </h1>
         <button
           onClick={handleRedirect}
-          className="text-sm text-slate-700 px-4 py-2 tracking-wide rounded hover:bg-slate-300 transition duration-200 flex items-center"
+          className="text-sm text-slate-700 px-4 py-2 tracking-wide rounded hover:underline transition duration-200 flex items-center"
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
