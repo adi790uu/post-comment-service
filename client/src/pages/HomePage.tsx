@@ -61,7 +61,9 @@ const HomePage = () => {
                   className="bg-white p-6 rounded-lg shadow-md"
                 >
                   <h3 className="text-2xl font-bold text-gray-800 mb-1">
-                    {post?.title}
+                    <Link to={`/post/${post?.id}`} className="hover:underline">
+                      {post?.title}
+                    </Link>
                   </h3>
                   <p className="text-sm text-gray-500">
                     {formatDate(post?.date)}
