@@ -9,6 +9,7 @@ This project is a web application built with React, TypeScript, and Vite. It all
 - View post details and comments
 - Add comments to posts
 - Responsive design for mobile and desktop
+- Rich text support for both comments as well as creating post.
 
 ## Technologies Used
 
