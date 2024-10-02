@@ -4,6 +4,7 @@ import (
 	"encoding/json"
 	"log/slog"
 	"post-comment-service/models"
+	"post-comment-service/services/cache"
 	"time"
 
 	"post-comment-service/database"
@@ -13,8 +14,16 @@ import (
 	"go.mongodb.org/mongo-driver/bson/primitive"
 )
 
+var postsCache = cache.NewPostCache(1 * time.Minute)
+
 func GetPosts(c *fiber.Ctx) error {
 	coll := database.GetCollection("posts")
+	postsCache.CheckAndClear()
+
+	if len(postsCache.GetAll()) > 0 {
+		slog.Info("Returning cached posts")
+		return c.Status(200).JSON(postsCache.GetAll())
+	}
 
 	cursor, err := coll.Find(c.Context(), bson.M{})
 	if err != nil {
@@ -28,6 +37,8 @@ func GetPosts(c *fiber.Ctx) error {
 		slog.Error("Error decoding documents:", err)
 		return c.Status(500).JSON(fiber.Map{"error": "cannot decode documents"})
 	}
+	slog.Info("Setting posts cache")
+	postsCache.SetAll(posts)
 	return c.Status(200).JSON(posts)
 }
 
