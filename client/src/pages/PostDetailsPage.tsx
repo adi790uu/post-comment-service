@@ -72,7 +72,7 @@ const PostDetailsPage: React.FC = () => {
   };
 
   if (loading) {
-    return <div>Loading...</div>;
+    return <div className="h-screen text-center">Loading...</div>;
   }
 
   if (error) {
