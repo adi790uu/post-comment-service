@@ -23,7 +23,9 @@ const HomePage = () => {
   useEffect(() => {
     const fetchPosts = async () => {
       try {
-        const response = await axios.get("http://localhost:3000/v1/post/all");
+        const response = await axios.get(
+          `${import.meta.env.VITE_BASE_URL}/v1/post/all`
+        );
         const sortedPosts = response.data.sort(
           (a: Post, b: Post) =>
             new Date(b.date).getTime() - new Date(a.date).getTime()

@@ -23,7 +23,7 @@ const PostCreationPage: React.FC = () => {
     console.log(content);
 
     const result = await axios.post(
-      "http://localhost:3000/v1/post/create",
+      `${import.meta.env.VITE_BASE_URL}/v1/post/create`,
       newPost
     );
 

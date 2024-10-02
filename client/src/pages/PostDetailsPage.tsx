@@ -31,7 +31,9 @@ const PostDetailsPage: React.FC = () => {
   useEffect(() => {
     const fetchPost = async () => {
       try {
-        const response = await axios.get(`http://localhost:3000/v1/post/${id}`);
+        const response = await axios.get(
+          `${import.meta.env.VITE_BASE_URL}/v1/post/${id}`
+        );
         setPost(response.data.post);
         setComments(response.data.comments);
       } catch (err) {
@@ -54,7 +56,7 @@ const PostDetailsPage: React.FC = () => {
       };
 
       const result = await axios.post(
-        "http://localhost:3000/v1/comment/create",
+        `${import.meta.env.VITE_BASE_URL}/v1/comment/create`,
         newComment
       );
 
@@ -86,7 +88,6 @@ const PostDetailsPage: React.FC = () => {
   return (
     <div className="min-h-screen w-full bg-gray-100 py-8">
       <div className="w-11/12 lg:w-2/3 mx-auto">
-        {/* Post Section */}
         <div className="p-6 rounded-lg mb-4 bg-white">
           <h1 className="text-5xl font-bold text-gray-800 mb-4 text-center">
             {post.title}
